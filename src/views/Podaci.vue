@@ -9,7 +9,13 @@
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
+              <v-btn
+                color="green lighten-2"
+                dark
+                class="mb-2"
+                v-bind="attrs"
+                v-on="on"
+                ><v-icon>mdi-plus</v-icon>
                 Novo govedo
               </v-btn>
             </template>
@@ -42,7 +48,7 @@
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.rodenje"
-                        label="Datum rođenja"
+                        label="YYYY-MM-DD"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
@@ -76,9 +82,9 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">
-                  Cancel
+                  Odustani
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                <v-btn color="blue darken-1" text @click="save"> Spremi </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -90,10 +96,10 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
+                  >Odustani</v-btn
                 >
                 <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
+                  >U redu</v-btn
                 >
                 <v-spacer></v-spacer>
               </v-card-actions>
@@ -131,6 +137,7 @@ export default {
       { text: "Pasmina", value: "pasmina", sortable: false },
       { text: "Živ. broj majke", value: "majka", sortable: false },
       { text: "Hb broj oca", value: "otac", sortable: false },
+      { text: "Izmjena/Brisanje", value: "actions", sortable: false },
     ],
     govedo: [],
     editedIndex: -1,
@@ -138,7 +145,7 @@ export default {
       drzava: "",
       zivbroj: "",
       ime: "",
-      rodenje: "YYYY-MM-DD",
+      rodenje: "",
       spol: "",
       pasmina: "",
       majka: 0,
@@ -148,7 +155,7 @@ export default {
       drzava: "",
       zivbroj: "",
       ime: "",
-      rodenje: "YYYY-MM-DD",
+      rodenje: "",
       spol: "",
       pasmina: "",
       majka: 0,
@@ -158,7 +165,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "Novo govedo" : "Uredi podatke";
     },
   },
 
