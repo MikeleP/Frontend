@@ -1,15 +1,35 @@
 <template>
   <v-app>
-    <v-data-table :headers="headers" :items="odlazak" class="elevation-1">
+    <v-data-table
+      :headers="headers"
+      :search="search"
+      :items="odlazak"
+      class="elevation-1"
+    >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Podaci o dolasku na gospodarstvo</v-toolbar-title>
-          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-toolbar-title>
+            <v-text-field
+              v-model="search"
+              color="green"
+              rounded
+              filled
+              append-icon="mdi-magnify"
+              label="Pretraživanje"
+              hide-details
+            ></v-text-field
+          ></v-toolbar-title>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Dodaj novi odlazak
+              <v-btn
+                color="green lighten-2"
+                dark
+                class="mb-2"
+                v-bind="attrs"
+                v-on="on"
+                ><v-icon color="blue" large>mdi-plus</v-icon>
+                Novi odlazak
               </v-btn>
             </template>
             <v-card>
@@ -22,32 +42,32 @@
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.name"
-                        label="Dessert name"
+                        v-model="editedItem.zivbroj"
+                        label="Životni broj goveda"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.calories"
-                        label="Calories"
+                        v-model="editedItem.datum"
+                        label="YYYY-MM-DD"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.fat"
-                        label="Fat (g)"
+                        v-model="editedItem.vrsta"
+                        label="Vrsta odlaska"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.carbs"
-                        label="Carbs (g)"
+                        v-model="editedItem.predsjednik"
+                        label="Ime i prezime novog predsjednika"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.protein"
-                        label="Protein (g)"
+                        v-model="editedItem.sifra"
+                        label="Šifra predsjednika"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -65,7 +85,7 @@
           </v-dialog>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
-              <v-card-title class="text-h5"
+              <v-card-title class="text-no-wrap"
                 >Jeste li sigurni da želite izbrisati ovaj
                 odlazak?</v-card-title
               >
@@ -83,9 +103,13 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+      <template v-slot:[`item.akcija`]="{ item }">
+        <v-icon medium class="mr-2" @click="editItem(item)" color="blue">
+          mdi-pencil
+        </v-icon>
+        <v-icon medium @click="deleteItem(item)" color="red">
+          mdi-delete
+        </v-icon>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
@@ -97,6 +121,7 @@
 <script>
 export default {
   data: () => ({
+    search: "",
     dialog: false,
     dialogDelete: false,
     headers: [
@@ -110,7 +135,7 @@ export default {
       { text: "Vrsta odlaska", value: "vrsta" },
       { text: "Ime i prezime novog predsjednika", value: "predsjednik" },
       { text: "Šifra predjsednika", value: "sifra" },
-      { text: "Actions", value: "actions", sortable: false },
+      { text: "Izmjena/Brisanje", value: "akcija", sortable: false },
     ],
     odlazak: [],
     editedIndex: -1,

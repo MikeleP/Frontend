@@ -6,7 +6,8 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/podaci",
+    alias: "/",
     name: "podaci",
     component: Podaci,
   },

@@ -1,12 +1,24 @@
 <template>
   <v-app>
-    <v-data-table :headers="headers" :items="dolazak" class="elevation-1">
+    <v-data-table
+      :headers="headers"
+      :search="search"
+      :items="dolazak"
+      class="elevation-1"
+    >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title color="green lighten-2"
-            >Dolazak na gospodarstvo</v-toolbar-title
-          >
-          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-toolbar-title>
+            <v-text-field
+              v-model="search"
+              color="green"
+              rounded
+              filled
+              append-icon="mdi-magnify"
+              label="Pretraživanje"
+              hide-details
+            ></v-text-field
+          ></v-toolbar-title>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -16,7 +28,7 @@
                 class="mb-2"
                 v-bind="attrs"
                 v-on="on"
-              >
+                ><v-icon color="blue" large>mdi-plus</v-icon>
                 Novi dolazak
               </v-btn>
             </template>
@@ -59,9 +71,9 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="900px">
+          <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
-              <v-card-title class="text-h4"
+              <v-card-title class="text-no-wrap"
                 >Jeste li sigurni da želite izbrisati ovaj
                 dolazak?</v-card-title
               >
@@ -79,9 +91,13 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+      <template v-slot:[`item.akcija`]="{ item }">
+        <v-icon medium class="mr-2" @click="editItem(item)" color="blue">
+          mdi-pencil
+        </v-icon>
+        <v-icon medium @click="deleteItem(item)" color="red">
+          mdi-delete
+        </v-icon>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
@@ -93,6 +109,7 @@
 <script>
 export default {
   data: () => ({
+    search: "",
     dialog: false,
     dialogDelete: false,
     headers: [
@@ -108,6 +125,7 @@ export default {
         sortable: false,
       },
       { text: "Šifra predsjednika", value: "sifra", sortable: false },
+      { text: "Izmjena/Brisanje", value: "akcija", sortable: false },
     ],
     dolazak: [],
     editedIndex: -1,
