@@ -1,138 +1,152 @@
 <template>
-  <v-app>
-    <v-data-table
-      :headers="headers"
-      :search="search"
-      :items="govedo"
-      class="elevation-1"
-    >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>
-            <v-text-field
-              v-model="search"
-              color="green"
-              rounded
-              filled
-              append-icon="mdi-magnify"
-              label="Pretraživanje"
-              hide-details
-            ></v-text-field
-          ></v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                color="green lighten-2"
-                dark
-                class="mb-2"
-                v-bind="attrs"
-                v-on="on"
-                ><v-icon color="blue" large>mdi-plus</v-icon>
-                Novo govedo
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
-              </v-card-title>
-
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.drzava"
-                        label="Kod drzave"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.zivbroj"
-                        label="Ziv. broj goveda"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.ime"
-                        label="Ime goveda"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.rodenje"
-                        label="YYYY-MM-DD"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.spol"
-                        label="Spol"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.pasmina"
-                        label="Pasmina"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.majka"
-                        label="Ziv. broj majke"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.otac"
-                        label="Hb broj oca"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Odustani
+  <div>
+    <v-app>
+      <v-data-table
+        :headers="headers"
+        :search="search"
+        :items="govedo"
+        class="elevation-1 green lighten-4"
+      >
+        <template v-slot:top>
+          <v-toolbar flat>
+            <v-toolbar-title>
+              <v-text-field
+                v-model="search"
+                class="green lighten-4 blue--text"
+                filled
+                rounded
+                dense
+                append-icon="mdi-magnify"
+                label="Pretraživanje"
+                hide-details
+              ></v-text-field
+            ></v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-dialog v-model="dialog" max-width="500px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="green lighten-2"
+                  dark
+                  class="mb-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  ><v-icon color="blue" x-large>mdi-plus</v-icon>
+                  Novo govedo
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save"> Spremi </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-no-wrap"
-                >Jeste li sigurni da zelite izbrisati ovo govedo?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Odustani</v-btn
+              </template>
+              <v-card class="green lighten-4">
+                <v-card-title>
+                  <span class="text-h5">{{ formTitle }}</span>
+                </v-card-title>
+
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.drzava"
+                          label="Kod drzave"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.zivbroj"
+                          label="Ziv. broj goveda"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.ime"
+                          label="Ime goveda"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.rodenje"
+                          label="YYYY-MM-DD"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.spol"
+                          label="Spol"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.pasmina"
+                          label="Pasmina"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.majka"
+                          label="Ziv. broj majke"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.otac"
+                          label="Hb broj oca"
+                          filled
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="close">
+                    Odustani
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="save">
+                    Spremi
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="dialogDelete" max-width="500px">
+              <v-card class="green lighten-4">
+                <v-card-title class="text-no-wrap"
+                  >Jeste li sigurni da zelite izbrisati ovo
+                  govedo?</v-card-title
                 >
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >U redu</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-toolbar>
-      </template>
-      <template v-slot:[`item.akcija`]="{ item }">
-        <v-icon medium class="mr-2" @click="editItem(item)" color="blue">
-          mdi-pencil
-        </v-icon>
-        <v-icon medium @click="deleteItem(item)" color="red">
-          mdi-delete
-        </v-icon>
-      </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize"> Reset </v-btn>
-      </template>
-    </v-data-table>
-  </v-app>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="closeDelete"
+                    >Odustani</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                    >U redu</v-btn
+                  >
+                  <v-spacer></v-spacer>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
+        </template>
+        <template v-slot:[`item.akcija`]="{ item }">
+          <v-icon medium class="mr-2" @click="editItem(item)" color="blue">
+            mdi-pencil
+          </v-icon>
+          <v-icon medium @click="deleteItem(item)" color="red">
+            mdi-delete
+          </v-icon>
+        </template>
+        <template v-slot:no-data>
+          <v-btn color="primary" @click="initialize"> Reset </v-btn>
+        </template>
+      </v-data-table>
+    </v-app>
+  </div>
 </template>
 
 <script>
@@ -147,15 +161,51 @@ export default {
         align: "start",
         sortable: false,
         value: "drzava",
+        class: "green lighten-2",
       },
-      { text: "Živ. broj goveda", value: "zivbroj", sortable: false },
-      { text: "Ime goveda", value: "ime", sortable: false },
-      { text: "Datum rođenja", value: "rodenje" },
-      { text: "Spol", value: "spol", sortable: false },
-      { text: "Pasmina", value: "pasmina", sortable: false },
-      { text: "Živ. broj majke", value: "majka", sortable: false },
-      { text: "Hb broj oca", value: "otac", sortable: false },
-      { text: "Izmjena/Brisanje", value: "akcija", sortable: false },
+      {
+        text: "Živ. broj goveda",
+        value: "zivbroj",
+        sortable: false,
+        class: "green lighten-2",
+      },
+      {
+        text: "Ime goveda",
+        value: "ime",
+        sortable: false,
+        class: "green lighten-2",
+      },
+      { text: "Datum rođenja", value: "rodenje", class: "green lighten-2" },
+      {
+        text: "Spol",
+        value: "spol",
+        sortable: false,
+        class: "green lighten-2",
+      },
+      {
+        text: "Pasmina",
+        value: "pasmina",
+        sortable: false,
+        class: "green lighten-2",
+      },
+      {
+        text: "Živ. broj majke",
+        value: "majka",
+        sortable: false,
+        class: "green lighten-2",
+      },
+      {
+        text: "Hb broj oca",
+        value: "otac",
+        sortable: false,
+        class: "green lighten-2",
+      },
+      {
+        text: "Izmjena/Brisanje",
+        value: "akcija",
+        sortable: false,
+        class: "green lighten-2",
+      },
     ],
     govedo: [],
     editedIndex: -1,
