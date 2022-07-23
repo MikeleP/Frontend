@@ -136,8 +136,13 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Životni broj goveda",
+        text: "Rb.",
         align: "start",
+        value: "index",
+        class: "green lighten-2",
+      },
+      {
+        text: "Životni broj goveda",
         sortable: false,
         value: "zivbroj",
         class: "green lighten-2",
@@ -240,6 +245,15 @@ export default {
           sifra: "/",
         },
       ];
+      this.indeksirajOdlaske();
+    },
+
+    indeksirajOdlaske() {
+      let counter = 1;
+      this.odlazak.forEach((gubitak) => {
+        gubitak.index = counter;
+        counter += 1;
+      });
     },
 
     editItem(item) {
@@ -257,6 +271,7 @@ export default {
     deleteItemConfirm() {
       this.odlazak.splice(this.editedIndex, 1);
       this.closeDelete();
+      this.indeksirajOdlaske();
     },
 
     close() {

@@ -157,8 +157,13 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Kod države",
+        text: "Rb.",
         align: "start",
+        value: "index",
+        class: "green lighten-2",
+      },
+      {
+        text: "Kod države",
         sortable: false,
         value: "drzava",
         class: "green lighten-2",
@@ -304,6 +309,14 @@ export default {
           otac: 2318416264,
         },
       ];
+      this.indeksirajGoveda();
+    },
+    indeksirajGoveda() {
+      let counter = 1;
+      this.govedo.forEach((grlo) => {
+        grlo.index = counter;
+        counter += 1;
+      });
     },
 
     editItem(item) {
@@ -321,6 +334,7 @@ export default {
     deleteItemConfirm() {
       this.govedo.splice(this.editedIndex, 1);
       this.closeDelete();
+      this.indeksirajGoveda();
     },
 
     close() {

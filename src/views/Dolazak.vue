@@ -122,8 +122,13 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Živ. broj goveda",
+        text: "Rb.",
         align: "start",
+        value: "index",
+        class: "green lighten-2",
+      },
+      {
+        text: "Živ. broj goveda",
         sortable: false,
         value: "zivbroj",
         class: "green lighten-2",
@@ -219,6 +224,15 @@ export default {
           sifra: 68671128,
         },
       ];
+      this.indeksirajDolaske();
+    },
+
+    indeksirajDolaske() {
+      let counter = 1;
+      this.dolazak.forEach((dobitak) => {
+        dobitak.index = counter;
+        counter += 1;
+      });
     },
 
     editItem(item) {
@@ -236,6 +250,7 @@ export default {
     deleteItemConfirm() {
       this.dolazak.splice(this.editedIndex, 1);
       this.closeDelete();
+      this.indeksirajDolaske();
     },
 
     close() {
