@@ -50,11 +50,29 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.datum"
-                          label="YYYY-MM-DD"
-                          filled
-                        ></v-text-field>
+                        <v-menu
+                          v-model="menu2"
+                          :close-on-content-click="false"
+                          :nudge-right="40"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="editedItem.datum"
+                              label="Datum odlaska"
+                              prepend-icon="mdi-calendar"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="editedItem.datum"
+                            @input="menu2 = false"
+                          ></v-date-picker>
+                        </v-menu>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
@@ -134,6 +152,7 @@ export default {
     search: "",
     dialog: false,
     dialogDelete: false,
+    menu2: false,
     headers: [
       {
         text: "Rb.",
@@ -166,14 +185,18 @@ export default {
     editedIndex: -1,
     editedItem: {
       zivbroj: 0,
-      datum: "",
+      datum: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
       vrsta: "",
       predsjednik: "",
       sifra: "",
     },
     defaultItem: {
       zivbroj: 0,
-      datum: "",
+      datum: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
       vrsta: "",
       predsjednik: "",
       sifra: "",
@@ -211,35 +234,35 @@ export default {
         },
         {
           zivbroj: 6489032302,
-          datum: "2018-12-5",
+          datum: "2018-04-27",
           vrsta: "Krađa",
           predsjednik: "/",
           sifra: "/",
         },
         {
           zivbroj: 4645210686,
-          datum: "2018-12-5",
+          datum: "2018-31-08",
           vrsta: "Prodaja",
           predsjednik: "Željko Knjaz",
           sifra: "51147520",
         },
         {
           zivbroj: 8468713127,
-          datum: "2018-12-5",
+          datum: "2018-05-05",
           vrsta: "Prodaja",
           predsjednik: "Marko Ivić",
           sifra: "96055041",
         },
         {
           zivbroj: 4311224504,
-          datum: "2018-12-5",
+          datum: "2018-09-07",
           vrsta: "Uginuće",
           predsjednik: "/",
           sifra: "/",
         },
         {
           zivbroj: 8689205866,
-          datum: "2018-12-5",
+          datum: "2018-10-01",
           vrsta: "Uginuće",
           predsjednik: "/",
           sifra: "/",
@@ -295,6 +318,7 @@ export default {
         Object.assign(this.odlazak[this.editedIndex], this.editedItem);
       } else {
         this.odlazak.push(this.editedItem);
+        this.indeksirajOdlaske();
       }
       this.close();
     },

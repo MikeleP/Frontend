@@ -50,6 +50,31 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
+                        <v-menu
+                          v-model="menu2"
+                          :close-on-content-click="false"
+                          :nudge-right="40"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="editedItem.datum"
+                              label="Datum dolaska"
+                              prepend-icon="mdi-calendar"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="editedItem.datum"
+                            @input="menu2 = false"
+                          ></v-date-picker>
+                        </v-menu>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.predsjednik"
                           label="Ime i prezime prijašnjeg predsjednika"
@@ -120,6 +145,7 @@ export default {
     search: "",
     dialog: false,
     dialogDelete: false,
+    menu2: false,
     headers: [
       {
         text: "Rb.",
@@ -131,6 +157,12 @@ export default {
         text: "Živ. broj goveda",
         sortable: false,
         value: "zivbroj",
+        class: "green lighten-2",
+      },
+      {
+        text: "Datum dolaska",
+        value: "datum",
+        sortable: false,
         class: "green lighten-2",
       },
       {
@@ -156,11 +188,17 @@ export default {
     editedIndex: -1,
     editedItem: {
       zivbroj: 0,
+      datum: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
       predsjednik: "",
       sifra: 0,
     },
     defaultItem: {
       zivbroj: 0,
+      datum: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
       predsjednik: "",
       sifra: 0,
     },
@@ -190,36 +228,43 @@ export default {
       this.dolazak = [
         {
           zivbroj: 1440352494,
+          datum: "2015-11-12",
           predsjednik: "Marko Juric",
           sifra: 54464051,
         },
         {
           zivbroj: 2512573320,
+          datum: "2021-06-08",
           predsjednik: "Ivan Horvat",
           sifra: 44188632,
         },
         {
           zivbroj: 2457993093,
+          datum: "2020-02-07",
           predsjednik: "Luka Marković",
           sifra: 41863809,
         },
         {
           zivbroj: 5249945677,
+          datum: "2019-11-10",
           predsjednik: "Ivan Vuković",
           sifra: 64837587,
         },
         {
           zivbroj: 8979759252,
+          datum: "2016-12-19",
           predsjednik: "Ivana Modrić",
           sifra: 20041062,
         },
         {
           zivbroj: 6908656687,
+          datum: "2016-09-15",
           predsjednik: "Lana Markić",
           sifra: 80241767,
         },
         {
           zivbroj: 4395150005,
+          datum: "2019-10-04",
           predsjednik: "Zdravko Kovačević",
           sifra: 68671128,
         },
@@ -274,6 +319,7 @@ export default {
         Object.assign(this.dolazak[this.editedIndex], this.editedItem);
       } else {
         this.dolazak.push(this.editedItem);
+        this.indeksirajDolaske();
       }
       this.close();
     },
