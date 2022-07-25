@@ -1,6 +1,17 @@
 <template>
   <div>
     <v-app>
+      <div
+        class="d-flex justify-space-around align-center flex-column flex-md-row my-4"
+      >
+        <v-card
+          class="d-flex green lighten-2 rounded-xl align-center justify-center purple--text"
+          height="80px"
+          width="1200"
+        >
+          <h1>Dolazak na gospodarstvo</h1>
+        </v-card>
+      </div>
       <v-data-table
         :headers="headers"
         :search="search"
@@ -21,16 +32,45 @@
                 hide-details
               ></v-text-field
             ></v-toolbar-title>
-            <v-spacer></v-spacer>
+            <div
+              class="d-flex justify-space-around align-center flex-column flex-md-row mx-auto"
+            >
+              <v-btn
+                rounded="lg"
+                color="green lighten-1"
+                class="mr-7 pa-6 elevation-5"
+                width="310px"
+                ><router-link
+                  style="text-decoration: none; color: white"
+                  to="/podaci"
+                >
+                  <v-icon color="purple">mdi-file-document</v-icon>
+                  Podaci o govedima
+                </router-link>
+              </v-btn>
+              <v-btn
+                rounded="lg"
+                color="green lighten-1"
+                class="mr-7 pa-6 elevation-5"
+                width="310px"
+                ><router-link
+                  style="text-decoration: none; color: white"
+                  to="/odlazak"
+                >
+                  <v-icon color="purple">mdi-emoticon-sad</v-icon>
+                  Odlazak s gospodarstva
+                </router-link>
+              </v-btn>
+            </div>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   color="green lighten-2"
                   dark
-                  class="mb-2"
+                  class="pa-6 elevation-5"
                   v-bind="attrs"
                   v-on="on"
-                  ><v-icon color="blue" x-large>mdi-plus</v-icon>
+                  ><v-icon color="purple" x-large>mdi-plus</v-icon>
                   Novi dolazak
                 </v-btn>
               </template>
@@ -42,14 +82,14 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.zivbroj"
                           label="Živ. broj goveda"
                           filled
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="6" md="15">
                         <v-menu
                           v-model="menu2"
                           :close-on-content-click="false"
@@ -66,6 +106,7 @@
                               readonly
                               v-bind="attrs"
                               v-on="on"
+                              filled
                             ></v-text-field>
                           </template>
                           <v-date-picker
@@ -74,14 +115,16 @@
                           ></v-date-picker>
                         </v-menu>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.predsjednik"
                           label="Ime i prezime prijašnjeg predsjednika"
                           filled
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.sifra"
                           label="Šifra predsjednika"
@@ -128,7 +171,7 @@
             mdi-pencil
           </v-icon>
           <v-icon medium @click="deleteItem(item)" color="red">
-            mdi-delete
+            mdi-eraser-variant
           </v-icon>
         </template>
         <template v-slot:no-data>
@@ -162,7 +205,6 @@ export default {
       {
         text: "Datum dolaska",
         value: "datum",
-        sortable: false,
         class: "green lighten-2",
       },
       {
