@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app>
+    <v-app class="yellow lighten-3">
       <div
         class="d-flex justify-space-around align-center flex-column flex-md-row my-4"
       >
@@ -19,7 +19,7 @@
         class="elevation-1 green lighten-4"
       >
         <template v-slot:top>
-          <v-toolbar flat>
+          <v-toolbar flat class="yellow lighten-3">
             <v-toolbar-title>
               <v-text-field
                 v-model="search"
