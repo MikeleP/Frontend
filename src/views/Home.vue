@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <v-app>
-      <div class="d-flex justify-space-around align-center fill-height mx-auto">
-        <div>
+  <v-app>
+    <v-container fill-height>
+      <v-col>
+        <v-row class="pa-3 align-center justify-center">
           <v-btn
             rounded="lg"
             color="green lighten-1"
@@ -16,8 +16,8 @@
               Podaci o govedima
             </router-link>
           </v-btn>
-        </div>
-        <div>
+        </v-row>
+        <v-row class="pa-3 align-center justify-center">
           <v-btn
             rounded="lg"
             color="green lighten-1"
@@ -31,8 +31,8 @@
               Dolazak na gospodarstvo
             </router-link>
           </v-btn>
-        </div>
-        <div>
+        </v-row>
+        <v-row class="pa-3 align-center justify-center">
           <v-btn
             rounded="lg"
             color="green lighten-1"
@@ -46,8 +46,8 @@
               Odlazak s gospodarstva
             </router-link>
           </v-btn>
-        </div>
-      </div>
-    </v-app>
-  </div>
+        </v-row>
+      </v-col>
+    </v-container>
+  </v-app>
 </template>
