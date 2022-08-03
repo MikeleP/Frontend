@@ -207,9 +207,6 @@
             mdi-eraser-variant
           </v-icon>
         </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize"> Reset </v-btn>
-        </template>
       </v-data-table>
     </v-app>
   </div>
@@ -322,66 +319,19 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
+  async mounted() {
+    this.govedo = await this.getGovedo();
+
+    this.indeksirajGoveda();
   },
 
   methods: {
-    initialize() {
-      this.govedo = [
-        {
-          drzava: "HR",
-          zivbroj: "3905619475",
-          ime: "LISA",
-          rodenje: "2018-07-05",
-          spol: "Ž",
-          pasmina: "01",
-          majka: 22149874,
-          otac: 4824520315,
-        },
-        {
-          drzava: "IT",
-          zivbroj: "4933078281",
-          ime: "FORTI",
-          rodenje: "2017-10-04",
-          spol: "M",
-          pasmina: "05",
-          majka: 88342561,
-          otac: 8645447210,
-        },
-        {
-          drzava: "HR",
-          zivbroj: "1114678668",
-          ime: "SIVKA",
-          rodenje: "2018-01-06",
-          spol: "Ž",
-          pasmina: "01",
-          majka: 46073271,
-          otac: 9657820151,
-        },
-        {
-          drzava: "IT",
-          zivbroj: "6484647447",
-          ime: "VELI",
-          rodenje: "2018-12-01",
-          spol: "M",
-          pasmina: "01",
-          majka: 38907163,
-          otac: 8509159542,
-        },
-        {
-          drzava: "SI",
-          zivbroj: "8688450510",
-          ime: "SIVI",
-          rodenje: "2016-04-12",
-          spol: "M",
-          pasmina: "01",
-          majka: 59600039,
-          otac: 2318416264,
-        },
-      ];
-      this.indeksirajGoveda();
+    async getGovedo() {
+      let response = await fetch("http://localhost:3000/govedo");
+      let govedo = await response.json();
+      return govedo;
     },
+
     indeksirajGoveda() {
       let counter = 1;
       this.govedo.forEach((grlo) => {
