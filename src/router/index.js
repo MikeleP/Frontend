@@ -13,29 +13,17 @@ const routes = [
   {
     path: "/podaci",
     name: "podaci",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Podaci.vue"),
+    component: () => import("../views/Podaci.vue"),
   },
   {
     path: "/dolazak",
     name: "dolazak",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Dolazak.vue"),
+    component: () => import("../views/Dolazak.vue"),
   },
   {
     path: "/odlazak",
     name: "odlazak",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Odlazak.vue"),
+    component: () => import("../views/Odlazak.vue"),
   },
 ];
 
