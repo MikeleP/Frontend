@@ -332,6 +332,22 @@ export default {
       return govedo;
     },
 
+    async postGovedo() {
+      fetch("http://localhost:3000/govedo", {
+        method: "POST",
+        body: {
+          drzava: drzava,
+          zivbroj: zivbroj,
+          ime: ime,
+          rodenje: rodenje,
+          spol: spol,
+          pasmina: pasmina,
+          majka: majka,
+          otac: otac,
+        },
+      });
+    },
+
     indeksirajGoveda() {
       let counter = 1;
       this.govedo.forEach((grlo) => {
