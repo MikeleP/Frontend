@@ -146,7 +146,8 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close">
+                  <v-btn color="blue darken-1" text
+                   @click="close">
                     Odustani
                   </v-btn>
                   <v-btn color="blue darken-1" text @click="save">

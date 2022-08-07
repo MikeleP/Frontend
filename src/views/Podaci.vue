@@ -37,7 +37,7 @@
               class="d-flex justify-space-around align-center flex-column flex-md-row mx-auto"
             >
               <v-btn
-                rounded="lg"
+                rounded
                 color="green lighten-1"
                 class="mr-7 pa-6 elevation-5"
                 width="310px"
@@ -50,7 +50,7 @@
                 </router-link>
               </v-btn>
               <v-btn
-                rounded="lg"
+                rounded
                 color="green lighten-1"
                 class="mr-7 pa-6 elevation-5"
                 width="310px"
@@ -173,7 +173,7 @@
                   <v-btn color="blue darken-1" text @click="close">
                     Odustani
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="save">
+                  <v-btn color="blue darken-1" text @click="postGovedo()">
                     Spremi
                   </v-btn>
                 </v-card-actions>
@@ -333,19 +333,26 @@ export default {
     },
 
     async postGovedo() {
+      let ob = {
+        drzava: this.editedItem.drzava,
+        zivbroj: this.editedItem.zivbroj,
+        ime: this.editedItem.ime,
+        rodenje: this.editedItem.rodenje,
+        spol: this.editedItem.spol,
+        pasmina: this.editedItem.pasmina,
+        majka: this.editedItem.majka,
+        otac: this.editedItem.otac,
+      };
+      console.log(ob);
       fetch("http://localhost:3000/govedo", {
         method: "POST",
-        body: {
-          drzava: drzava,
-          zivbroj: zivbroj,
-          ime: ime,
-          rodenje: rodenje,
-          spol: spol,
-          pasmina: pasmina,
-          majka: majka,
-          otac: otac,
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(ob),
       });
+      this.close();
+      this.$router.go();
     },
 
     indeksirajGoveda() {
@@ -390,15 +397,15 @@ export default {
       });
     },
 
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.govedo[this.editedIndex], this.editedItem);
-      } else {
-        this.govedo.push(this.editedItem);
-        this.indeksirajGoveda();
-      }
-      this.close();
-    },
+    // save() {
+    //   if (this.editedIndex > -1) {
+    //     Object.assign(this.govedo[this.editedIndex], this.editedItem);
+    //   } else {
+    //     this.govedo.push(this.editedItem);
+    //     this.indeksirajGoveda();
+    //   }
+    //   this.close();
+    // },
   },
 };
 </script>
