@@ -146,8 +146,7 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text
-                   @click="close">
+                  <v-btn color="blue darken-1" text @click="close">
                     Odustani
                   </v-btn>
                   <v-btn color="blue darken-1" text @click="save">
@@ -261,59 +260,7 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
-
   methods: {
-    initialize() {
-      this.odlazak = [
-        {
-          zivbroj: 4609765268,
-          datum: "2018-12-5",
-          vrsta: "Uginuće",
-          predsjednik: "/",
-          sifra: "/",
-        },
-        {
-          zivbroj: 6489032302,
-          datum: "2018-04-27",
-          vrsta: "Krađa",
-          predsjednik: "/",
-          sifra: "/",
-        },
-        {
-          zivbroj: 4645210686,
-          datum: "2018-31-08",
-          vrsta: "Prodaja",
-          predsjednik: "Željko Knjaz",
-          sifra: "51147520",
-        },
-        {
-          zivbroj: 8468713127,
-          datum: "2018-05-05",
-          vrsta: "Prodaja",
-          predsjednik: "Marko Ivić",
-          sifra: "96055041",
-        },
-        {
-          zivbroj: 4311224504,
-          datum: "2018-09-07",
-          vrsta: "Uginuće",
-          predsjednik: "/",
-          sifra: "/",
-        },
-        {
-          zivbroj: 8689205866,
-          datum: "2018-10-01",
-          vrsta: "Uginuće",
-          predsjednik: "/",
-          sifra: "/",
-        },
-      ];
-      this.indeksirajOdlaske();
-    },
-
     indeksirajOdlaske() {
       let counter = 1;
       this.odlazak.forEach((gubitak) => {
