@@ -349,12 +349,6 @@ export default {
       this.dialogDelete = true;
     },
 
-    deleteItemConfirm() {
-      this.odlazak.splice(this.editedIndex, 1);
-      this.closeDelete();
-      this.indeksirajOdlaske();
-    },
-
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -369,16 +363,6 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
-    },
-
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.odlazak[this.editedIndex], this.editedItem);
-      } else {
-        this.odlazak.push(this.editedItem);
-        this.indeksirajOdlaske();
-      }
-      this.close();
     },
   },
 };
