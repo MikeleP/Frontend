@@ -351,7 +351,6 @@ export default {
         },
         body: JSON.stringify(ob),
       });
-      this.close();
       this.$router.go();
     },
 
