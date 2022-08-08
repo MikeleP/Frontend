@@ -258,7 +258,19 @@ export default {
     },
   },
 
+  async mounted() {
+    this.govedo = await this.getDolazak();
+
+    this.indeksirajDolaske();
+  },
+
   methods: {
+    async getDolazak() {
+      let response = await fetch("http://localhost:3000/dolazak");
+      let dolazak = await response.json();
+      return dolazak;
+    },
+
     indeksirajDolaske() {
       let counter = 1;
       this.dolazak.forEach((dobitak) => {
