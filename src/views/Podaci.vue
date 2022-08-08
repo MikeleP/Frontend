@@ -198,7 +198,10 @@
                   <v-btn color="blue darken-1" text @click="closeDelete"
                     >Odustani</v-btn
                   >
-                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="removeGovedo(editedItem._id)"
                     >U redu</v-btn
                   >
                   <v-spacer></v-spacer>
@@ -381,6 +384,13 @@ export default {
       this.$router.go();
     },
 
+    async removeGovedo(idGoveda) {
+      const response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
+        method: "DELETE",
+      });
+      this.$router.go();
+    },
+
     indeksirajGoveda() {
       let counter = 1;
       this.govedo.forEach((grlo) => {
@@ -401,11 +411,11 @@ export default {
       this.dialogDelete = true;
     },
 
-    deleteItemConfirm() {
-      this.govedo.splice(this.editedIndex, 1);
-      this.closeDelete();
-      this.indeksirajGoveda();
-    },
+    // deleteItemConfirm() {
+    //   this.govedo.splice(this.editedIndex, 1);
+    //   this.closeDelete();
+    //   this.indeksirajGoveda();
+    // },
 
     close() {
       this.dialog = false;
