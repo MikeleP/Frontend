@@ -36,7 +36,7 @@
               class="d-flex justify-space-around align-center flex-column flex-md-row mx-auto"
             >
               <v-btn
-                rounded="lg"
+                rounded
                 color="green lighten-1"
                 class="mr-7 pa-6 elevation-5"
                 width="310px"
@@ -49,7 +49,7 @@
                 </router-link>
               </v-btn>
               <v-btn
-                rounded="lg"
+                rounded
                 color="green lighten-1"
                 class="mr-7 pa-6 elevation-5"
                 width="310px"
