@@ -173,7 +173,15 @@
                   <v-btn color="blue darken-1" text @click="close">
                     Odustani
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="postGovedo()">
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="
+                      formTitle === 'Novo govedo'
+                        ? postGovedo()
+                        : putGovedo(editedItem._id)
+                    "
+                  >
                     Spremi
                   </v-btn>
                 </v-card-actions>
@@ -350,6 +358,25 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(ob),
+      });
+      this.$router.go();
+    },
+
+    async putGovedo(idGoveda) {
+      const noviPodaciOGovedu = {
+        drzava: this.editedItem.drzava,
+        zivbroj: this.editedItem.zivbroj,
+        ime: this.editedItem.ime,
+        rodenje: this.editedItem.rodenje,
+        spol: this.editedItem.spol,
+        pasmina: this.editedItem.pasmina,
+        majka: this.editedItem.majka,
+        otac: this.editedItem.otac,
+      };
+      const response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(noviPodaciOGovedu),
       });
       this.$router.go();
     },
