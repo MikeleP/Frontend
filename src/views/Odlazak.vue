@@ -174,7 +174,7 @@
                   <v-btn color="blue darken-1" text @click="closeDelete"
                     >Odustani</v-btn
                   >
-                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                  <v-btn color="blue darken-1" text @click="removeOdlazak()"
                     >U redu</v-btn
                   >
                   <v-spacer></v-spacer>
@@ -314,6 +314,16 @@ export default {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(noviPodaciOOdlasku),
+        }
+      );
+      this.$router.go();
+    },
+
+    async removeOdlazak(idOdlaska) {
+      const response = await fetch(
+        `http://localhost:3000/odlazak/${idOdlaska}`,
+        {
+          method: "DELETE",
         }
       );
       this.$router.go();
