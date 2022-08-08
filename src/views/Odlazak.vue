@@ -149,7 +149,15 @@
                   <v-btn color="blue darken-1" text @click="close">
                     Odustani
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="postOdlazak()">
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="
+                      formTitle === 'Novi odlazak'
+                        ? postOdlazak()
+                        : putOdlazak(editedItem._id)
+                    "
+                  >
                     Spremi
                   </v-btn>
                 </v-card-actions>
@@ -289,6 +297,25 @@ export default {
         },
         body: JSON.stringify(ob),
       });
+      this.$router.go();
+    },
+
+    async putOdlazak(idOdlaska) {
+      const noviPodaciOOdlasku = {
+        zivbroj: this.editedItem.zivbroj,
+        datum: this.editedItem.datum,
+        vrsta: this.editedItem.vrsta,
+        predsjednik: this.editedItem.predsjednik,
+        sifra: this.editedItem.sifra,
+      };
+      const response = await fetch(
+        `http://localhost:3000/odlazak/${idOdlaska}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(noviPodaciOOdlasku),
+        }
+      );
       this.$router.go();
     },
 
