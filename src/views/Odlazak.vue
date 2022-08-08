@@ -263,7 +263,7 @@ export default {
   async mounted() {
     this.odlazak = await this.getOdlazak();
 
-    this.indeksirajGoveda();
+    this.indeksirajOdlaske();
   },
 
   methods: {
