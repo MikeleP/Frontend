@@ -36,7 +36,7 @@
               class="d-flex justify-space-around align-center flex-column flex-md-row mx-auto"
             >
               <v-btn
-                rounded="lg"
+                rounded
                 color="green lighten-1"
                 class="mr-7 pa-6 elevation-5"
                 width="310px"
@@ -49,7 +49,7 @@
                 </router-link>
               </v-btn>
               <v-btn
-                rounded="lg"
+                rounded
                 color="green lighten-1"
                 class="mr-7 pa-6 elevation-5"
                 width="310px"
@@ -140,7 +140,7 @@
                   <v-btn color="blue darken-1" text @click="close">
                     Odustani
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="save">
+                  <v-btn color="blue darken-1" text @click="postDolazak()">
                     Spremi
                   </v-btn>
                 </v-card-actions>
@@ -259,7 +259,7 @@ export default {
   },
 
   async mounted() {
-    this.govedo = await this.getDolazak();
+    this.dolazak = await this.getDolazak();
 
     this.indeksirajDolaske();
   },
@@ -269,6 +269,24 @@ export default {
       let response = await fetch("http://localhost:3000/dolazak");
       let dolazak = await response.json();
       return dolazak;
+    },
+
+    async postDolazak() {
+      let ob = {
+        zivbroj: this.editedItem.zivbroj,
+        datum: this.editedItem.datum,
+        predsjednik: this.editedItem.predsjednik,
+        sifra: this.editedItem.sifra,
+      };
+      console.log(ob);
+      fetch("http://localhost:3000/dolazak", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ob),
+      });
+      this.$router.go();
     },
 
     indeksirajDolaske() {
