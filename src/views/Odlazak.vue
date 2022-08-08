@@ -260,7 +260,19 @@ export default {
     },
   },
 
+  async mounted() {
+    this.odlazak = await this.getOdlazak();
+
+    this.indeksirajGoveda();
+  },
+
   methods: {
+    async getOdlazak() {
+      let response = await fetch("http://localhost:3000/odlazak");
+      let odlazak = await response.json();
+      return odlazak;
+    },
+
     indeksirajOdlaske() {
       let counter = 1;
       this.odlazak.forEach((gubitak) => {
