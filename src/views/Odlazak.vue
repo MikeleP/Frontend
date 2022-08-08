@@ -149,7 +149,7 @@
                   <v-btn color="blue darken-1" text @click="close">
                     Odustani
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="save">
+                  <v-btn color="blue darken-1" text @click="postOdlazak()">
                     Spremi
                   </v-btn>
                 </v-card-actions>
@@ -271,6 +271,25 @@ export default {
       let response = await fetch("http://localhost:3000/odlazak");
       let odlazak = await response.json();
       return odlazak;
+    },
+
+    async postOdlazak() {
+      let ob = {
+        zivbroj: this.editedItem.zivbroj,
+        datum: this.editedItem.datum,
+        vrsta: this.editedItem.vrsta,
+        predsjednik: this.editedItem.predsjednik,
+        sifra: this.editedItem.sifra,
+      };
+      console.log(ob);
+      fetch("http://localhost:3000/odlazak", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ob),
+      });
+      this.$router.go();
     },
 
     indeksirajOdlaske() {
