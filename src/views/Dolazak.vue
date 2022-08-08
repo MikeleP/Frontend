@@ -174,9 +174,6 @@
             mdi-eraser-variant
           </v-icon>
         </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize"> Reset </v-btn>
-        </template>
       </v-data-table>
     </v-app>
   </div>
@@ -261,59 +258,7 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
-
   methods: {
-    initialize() {
-      this.dolazak = [
-        {
-          zivbroj: 1440352494,
-          datum: "2015-11-12",
-          predsjednik: "Marko Juric",
-          sifra: 54464051,
-        },
-        {
-          zivbroj: 2512573320,
-          datum: "2021-06-08",
-          predsjednik: "Ivan Horvat",
-          sifra: 44188632,
-        },
-        {
-          zivbroj: 2457993093,
-          datum: "2020-02-07",
-          predsjednik: "Luka Marković",
-          sifra: 41863809,
-        },
-        {
-          zivbroj: 5249945677,
-          datum: "2019-11-10",
-          predsjednik: "Ivan Vuković",
-          sifra: 64837587,
-        },
-        {
-          zivbroj: 8979759252,
-          datum: "2016-12-19",
-          predsjednik: "Ivana Modrić",
-          sifra: 20041062,
-        },
-        {
-          zivbroj: 6908656687,
-          datum: "2016-09-15",
-          predsjednik: "Lana Markić",
-          sifra: 80241767,
-        },
-        {
-          zivbroj: 4395150005,
-          datum: "2019-10-04",
-          predsjednik: "Zdravko Kovačević",
-          sifra: 68671128,
-        },
-      ];
-      this.indeksirajDolaske();
-    },
-
     indeksirajDolaske() {
       let counter = 1;
       this.dolazak.forEach((dobitak) => {
