@@ -224,7 +224,7 @@
           </v-icon>
         </template>
       </v-data-table>
-      <div class="text-center pt-2">
+      <div class="text-center pt-2 green lighten-2">
         <v-pagination
           v-model="page"
           :length="pageCount"
@@ -245,7 +245,7 @@ export default {
     menu2: false,
     page: 1,
     pageCount: 0,
-    itemsPerPage: 2,
+    itemsPerPage: 7,
     headers: [
       {
         text: "Rb.",
