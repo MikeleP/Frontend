@@ -17,6 +17,10 @@
         :search="search"
         :items="govedo"
         class="elevation-1 green lighten-4"
+        hide-default-footer
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        @page-count="pageCount = $event"
       >
         <template v-slot:top>
           <v-toolbar flat class="yellow lighten-3">
@@ -129,6 +133,7 @@
                           <v-date-picker
                             v-model="editedItem.rodenje"
                             @input="menu2 = false"
+                            color="green darken-2"
                           ></v-date-picker>
                         </v-menu>
                       </v-col>
@@ -219,6 +224,14 @@
           </v-icon>
         </template>
       </v-data-table>
+      <div class="text-center pt-2">
+        <v-pagination
+          v-model="page"
+          :length="pageCount"
+          color="purple"
+          :total-visible="7"
+        ></v-pagination>
+      </div>
     </v-app>
   </div>
 </template>
@@ -230,6 +243,9 @@ export default {
     dialog: false,
     dialogDelete: false,
     menu2: false,
+    page: 1,
+    pageCount: 0,
+    itemsPerPage: 2,
     headers: [
       {
         text: "Rb.",
@@ -366,7 +382,7 @@ export default {
     },
 
     async putGovedo(idGoveda) {
-      const noviPodaciOGovedu = {
+      let noviPodaciOGovedu = {
         drzava: this.editedItem.drzava,
         zivbroj: this.editedItem.zivbroj,
         ime: this.editedItem.ime,
@@ -376,7 +392,7 @@ export default {
         majka: this.editedItem.majka,
         otac: this.editedItem.otac,
       };
-      const response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
+      let response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(noviPodaciOGovedu),
@@ -385,7 +401,7 @@ export default {
     },
 
     async removeGovedo(idGoveda) {
-      const response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
+      let response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
         method: "DELETE",
       });
       this.$router.go();
@@ -411,12 +427,6 @@ export default {
       this.dialogDelete = true;
     },
 
-    // deleteItemConfirm() {
-    //   this.govedo.splice(this.editedIndex, 1);
-    //   this.closeDelete();
-    //   this.indeksirajGoveda();
-    // },
-
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -432,16 +442,6 @@ export default {
         this.editedIndex = -1;
       });
     },
-
-    // save() {
-    //   if (this.editedIndex > -1) {
-    //     Object.assign(this.govedo[this.editedIndex], this.editedItem);
-    //   } else {
-    //     this.govedo.push(this.editedItem);
-    //     this.indeksirajGoveda();
-    //   }
-    //   this.close();
-    // },
   },
 };
 </script>

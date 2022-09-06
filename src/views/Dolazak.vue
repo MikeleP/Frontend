@@ -112,6 +112,7 @@
                           <v-date-picker
                             v-model="editedItem.datum"
                             @input="menu2 = false"
+                            color="green darken-2"
                           ></v-date-picker>
                         </v-menu>
                       </v-col>
@@ -301,30 +302,24 @@ export default {
     },
 
     async putDolazak(idDolaska) {
-      const noviPodaciODolasku = {
+      let noviPodaciODolasku = {
         zivbroj: this.editedItem.zivbroj,
         datum: this.editedItem.datum,
         predsjednik: this.editedItem.predsjednik,
         sifra: this.editedItem.sifra,
       };
-      const response = await fetch(
-        `http://localhost:3000/dolazak/${idDolaska}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(noviPodaciODolasku),
-        }
-      );
+      let response = await fetch(`http://localhost:3000/dolazak/${idDolaska}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(noviPodaciODolasku),
+      });
       this.$router.go();
     },
 
     async removeDolazak(idDolaska) {
-      const response = await fetch(
-        `http://localhost:3000/dolazak/${idDolaska}`,
-        {
-          method: "DELETE",
-        }
-      );
+      let response = await fetch(`http://localhost:3000/dolazak/${idDolaska}`, {
+        method: "DELETE",
+      });
       this.$router.go();
     },
 
