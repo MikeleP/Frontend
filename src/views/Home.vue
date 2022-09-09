@@ -2,7 +2,7 @@
   <div>
     <v-app>
       <v-container fill-height>
-        <v-col class="green lighten-3">
+        <v-col>
           <v-row class="pa-3 align-center justify-center">
             <v-btn
               rounded
