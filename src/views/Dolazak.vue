@@ -16,14 +16,14 @@
         :headers="headers"
         :search="search"
         :items="dolazak"
-        class="elevation-1 green lighten-4"
+        class="elevation-1 yellow lighten-4"
       >
         <template v-slot:top>
-          <v-toolbar flat class="yellow lighten-3">
+          <v-toolbar flat class="green lighten-3">
             <v-toolbar-title>
               <v-text-field
                 v-model="search"
-                class="green lighten-4 blue--text"
+                class="yellow lighten-3 blue--text"
                 filled
                 rounded
                 dense
