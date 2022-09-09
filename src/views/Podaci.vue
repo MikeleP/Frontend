@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app class="yellow lighten-3">
+    <v-app>
       <div
         class="d-flex justify-space-around align-center flex-column flex-md-row my-4"
       >
@@ -16,18 +16,18 @@
         :headers="headers"
         :search="search"
         :items="govedo"
-        class="elevation-1 green lighten-4"
+        class="elevation-1 yellow lighten-3"
         hide-default-footer
         :page.sync="page"
         :items-per-page="itemsPerPage"
         @page-count="pageCount = $event"
       >
         <template v-slot:top>
-          <v-toolbar flat class="yellow lighten-3">
+          <v-toolbar flat class="green lighten-3">
             <v-toolbar-title>
               <v-text-field
                 v-model="search"
-                class="green lighten-4 blue--text"
+                class="yellow lighten-3 blue--text"
                 filled
                 rounded
                 dense
