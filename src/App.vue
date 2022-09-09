@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <v-app-bar class="green lighten-2" dark>
       <div class="centriraj">
         <v-row>
@@ -16,9 +16,28 @@
   </v-app>
 </template>
 
-<style>
+<script>
+export default {
+  name: "App",
+  data: () => ({}),
+};
+</script>
+
+<style lang="scss">
 .centriraj {
   margin: 0 auto;
   float: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  background-image: url("./assets/krave.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 </style>
