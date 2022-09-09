@@ -16,7 +16,7 @@
         :headers="headers"
         :search="search"
         :items="dolazak"
-        class="elevation-1 yellow lighten-4"
+        class="elevation-1 yellow lighten-3"
         hide-default-footer
         :page.sync="page"
         :items-per-page="itemsPerPage"
