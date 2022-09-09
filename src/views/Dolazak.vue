@@ -17,6 +17,10 @@
         :search="search"
         :items="dolazak"
         class="elevation-1 yellow lighten-4"
+        hide-default-footer
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        @page-count="pageCount = $event"
       >
         <template v-slot:top>
           <v-toolbar flat class="green lighten-3">
@@ -187,6 +191,14 @@
           </v-icon>
         </template>
       </v-data-table>
+      <div class="text-center pt-2 green lighten-2">
+        <v-pagination
+          v-model="page"
+          :length="pageCount"
+          color="purple"
+          :total-visible="7"
+        ></v-pagination>
+      </div>
     </v-app>
   </div>
 </template>
@@ -198,6 +210,9 @@ export default {
     dialog: false,
     dialogDelete: false,
     menu2: false,
+    page: 1,
+    pageCount: 0,
+    itemsPerPage: 7,
     headers: [
       {
         text: "Rb.",
