@@ -188,7 +188,10 @@
                   <v-btn color="blue darken-1" text @click="closeDelete"
                     >Odustani</v-btn
                   >
-                  <v-btn color="blue darken-1" text @click="removeOdlazak()"
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="removeOdlazak(editedItem._id)"
                     >U redu</v-btn
                   >
                   <v-spacer></v-spacer>
