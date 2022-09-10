@@ -283,7 +283,7 @@ export default {
     vrstaRules: [(v) => !!v || "Niste odabrali vrstu odlaska."],
 
     predsjednikRules: [
-      (v) => !!v || "Niste unijeli ime i prezime predsjednika.",
+      (v) => !!v || "Niste unijeli ime i prezime novog predsjednika.",
     ],
 
     sifraRules: [(v) => !!v || "Niste unijeli šifru predsjednika."],
