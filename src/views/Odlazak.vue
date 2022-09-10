@@ -149,7 +149,7 @@
                         <v-text-field
                           v-model="editedItem.sifra"
                           :rules="sifraRules"
-                          label="šifra predsjednika"
+                          label="Šifra predsjednika"
                           required
                           filled
                         ></v-text-field>
@@ -278,15 +278,17 @@ export default {
       sifra: "",
     },
 
-    zivbrojRules: [(v) => !!v || "Unesite broj."],
+    zivbrojRules: [(v) => !!v || "Niste unijeli životni broj goveda."],
 
-    vrstaRules: [(v) => !!v || "Unesite vrstu."],
+    vrstaRules: [(v) => !!v || "Niste odabrali vrstu odlaska."],
 
-    predsjednikRules: [(v) => !!v || "Unesite predsjednika."],
+    predsjednikRules: [
+      (v) => !!v || "Niste unijeli ime i prezime predsjednika.",
+    ],
 
-    sifraRules: [(v) => !!v || "Unesite sifru."],
+    sifraRules: [(v) => !!v || "Niste unijeli šifru predsjednika."],
 
-    odlasci: ["Uginuće", "Klaonica", "Krađa", "Ostalo"],
+    odlasci: ["Prodaja", "Klaonica", "Uginuće", "Ostalo"],
   }),
 
   computed: {
