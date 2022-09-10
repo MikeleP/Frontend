@@ -84,12 +84,14 @@
                 </v-card-title>
 
                 <v-card-text>
-                  <v-container>
+                  <v-container ref="form" v-model="valid" lazy-validation>
                     <v-row>
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.zivbroj"
+                          :rules="zivbrojRules"
                           label="Živ. broj goveda"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
@@ -125,14 +127,18 @@
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.predsjednik"
+                          :rules="predsjednikRules"
                           label="Ime i prezime prijašnjeg predsjednika"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.sifra"
+                          :rules="sifraRules"
                           label="Šifra predsjednika"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
@@ -213,6 +219,7 @@ export default {
     page: 1,
     pageCount: 0,
     itemsPerPage: 7,
+    valid: true,
     headers: [
       {
         text: "Rb.",
@@ -268,6 +275,14 @@ export default {
       predsjednik: "",
       sifra: 0,
     },
+
+    zivbrojRules: [(v) => !!v || "Niste unijeli životni broj goveda."],
+
+    predsjednikRules: [
+      (v) => !!v || "Niste unijeli ime i prezime prijašnjeg predsjednika.",
+    ],
+
+    sifraRules: [(v) => !!v || "Niste unijeli šifru predsjednika."],
   }),
 
   computed: {
