@@ -85,19 +85,23 @@
                 </v-card-title>
 
                 <v-card-text>
-                  <v-container>
+                  <v-container ref="form" v-model="valid" lazy-validation>
                     <v-row>
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.drzava"
+                          :rules="drzavaRules"
                           label="Kod države"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.zivbroj"
+                          :rules="zivbrojRules"
                           label="Živ. broj goveda"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
@@ -106,7 +110,9 @@
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.ime"
+                          :rules="imeRules"
                           label="Ime goveda"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
@@ -142,30 +148,39 @@
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.spol"
+                          :rules="spolRules"
                           label="Spol"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="15">
-                        <v-text-field
+                        <v-select
                           v-model="editedItem.pasmina"
+                          :items="pasmine"
+                          :rules="pasminaRules"
                           label="Pasmina"
+                          required
                           filled
-                        ></v-text-field>
+                        ></v-select>
                       </v-col>
                     </v-row>
                     <v-row>
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.majka"
+                          :rules="majkaRules"
                           label="Živ. broj majke"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="15">
                         <v-text-field
                           v-model="editedItem.otac"
+                          :rules="otacRules"
                           label="Hb broj oca"
+                          required
                           filled
                         ></v-text-field>
                       </v-col>
@@ -313,7 +328,7 @@ export default {
         .toISOString()
         .substr(0, 10),
       spol: "",
-      pasmina: "",
+      pasmina: null,
       majka: 0,
       otac: 0,
     },
@@ -325,10 +340,40 @@ export default {
         .toISOString()
         .substr(0, 10),
       spol: "",
-      pasmina: "",
+      pasmina: null,
       majka: 0,
       otac: 0,
     },
+
+    drzavaRules: [(v) => !!v || "Niste unijeli kod države."],
+
+    zivbrojRules: [(v) => !!v || "Niste unijeli životni broj goveda."],
+
+    imeRules: [(v) => !!v || "Niste unijeli ime goveda."],
+
+    spolRules: [(v) => !!v || "Niste unijeli spol goveda."],
+
+    pasminaRules: [(v) => !!v || "Niste unijeli pasminu goveda."],
+
+    majkaRules: [(v) => !!v || "Niste unijeli Živ. broj majke."],
+
+    otacRules: [(v) => !!v || "Niste unijeli Hb broj oca."],
+
+    pasmine: [
+      "01",
+      "02",
+      "03",
+      "06",
+      "08",
+      "09",
+      "87",
+      "90",
+      "91",
+      "92",
+      "93",
+      "94",
+      "95",
+    ],
   }),
 
   computed: {
