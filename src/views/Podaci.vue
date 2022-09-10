@@ -261,6 +261,7 @@ export default {
     page: 1,
     pageCount: 0,
     itemsPerPage: 7,
+    valid: true,
     headers: [
       {
         text: "Rb.",
