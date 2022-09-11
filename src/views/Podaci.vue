@@ -146,13 +146,14 @@
                     </v-row>
                     <v-row>
                       <v-col cols="12" sm="6" md="15">
-                        <v-text-field
+                        <v-select
                           v-model="editedItem.spol"
+                          :items="spolovi"
                           :rules="spolRules"
                           label="Spol"
                           required
                           filled
-                        ></v-text-field>
+                        ></v-select>
                       </v-col>
                       <v-col cols="12" sm="6" md="15">
                         <v-select
@@ -329,7 +330,7 @@ export default {
       rodenje: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-      spol: "",
+      spol: null,
       pasmina: null,
       majka: 0,
       otac: 0,
@@ -341,7 +342,7 @@ export default {
       rodenje: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-      spol: "",
+      spol: null,
       pasmina: null,
       majka: 0,
       otac: 0,
@@ -376,6 +377,8 @@ export default {
       "94",
       "95",
     ],
+
+    spolovi: ["M", "Ž"],
   }),
 
   computed: {
@@ -388,10 +391,10 @@ export default {
         this.editedItem.drzava == "" ||
         this.editedItem.zivbroj == 0 ||
         this.editedItem.ime == "" ||
-        this.editedItem.spol == "" ||
-        this.editedItem.pasmina == "" ||
-        this.editedItem.majka == "" ||
-        this.editedItem.otac == ""
+        this.editedItem.spol == null ||
+        this.editedItem.pasmina == null ||
+        this.editedItem.majka == 0 ||
+        this.editedItem.otac == 0
       );
     },
   },
