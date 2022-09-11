@@ -166,6 +166,7 @@
                   <v-btn
                     color="blue darken-1"
                     text
+                    :disabled="pravoktuniciNisuIspunjeni"
                     @click="
                       formTitle === 'Novi odlazak'
                         ? postOdlazak()
@@ -297,6 +298,15 @@ export default {
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Novi odlazak" : "Uredi odlazak";
+    },
+
+    pravoktuniciNisuIspunjeni() {
+      return (
+        this.editedItem.zivbroj == 0 ||
+        this.editedItem.vrsta == null ||
+        this.editedItem.predsjednik == "" ||
+        this.editedItem.sifra == ""
+      );
     },
   },
 
