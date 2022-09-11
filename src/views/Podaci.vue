@@ -196,6 +196,7 @@
                   <v-btn
                     color="blue darken-1"
                     text
+                    :disabled="MissingValues"
                     @click="
                       formTitle === 'Novo govedo'
                         ? postGovedo()
@@ -323,7 +324,7 @@ export default {
     editedIndex: -1,
     editedItem: {
       drzava: "",
-      zivbroj: "",
+      zivbroj: 0,
       ime: "",
       rodenje: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -335,7 +336,7 @@ export default {
     },
     defaultItem: {
       drzava: "",
-      zivbroj: "",
+      zivbroj: 0,
       ime: "",
       rodenje: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -380,6 +381,18 @@ export default {
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Novo govedo" : "Uredi podatke";
+    },
+
+    MissingValues() {
+      return (
+        this.editedItem.drzava == "" ||
+        this.editedItem.zivbroj == 0 ||
+        this.editedItem.ime == "" ||
+        this.editedItem.spol == "" ||
+        this.editedItem.pasmina == "" ||
+        this.editedItem.majka == "" ||
+        this.editedItem.otac == ""
+      );
     },
   },
 
