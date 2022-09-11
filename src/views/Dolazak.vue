@@ -154,6 +154,7 @@
                   <v-btn
                     color="blue darken-1"
                     text
+                    :disabled="MissingValues"
                     @click="
                       formTitle === 'Novi dolazak'
                         ? postDolazak()
@@ -288,6 +289,14 @@ export default {
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Novi dolazak" : "Uredi dolazak";
+    },
+
+    MissingValues() {
+      return (
+        this.editedItem.zivbroj == 0 ||
+        this.editedItem.predsjednik == "" ||
+        this.editedItem.sifra == 0
+      );
     },
   },
 

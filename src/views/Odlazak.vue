@@ -166,7 +166,7 @@
                   <v-btn
                     color="blue darken-1"
                     text
-                    :disabled="pravoktuniciNisuIspunjeni"
+                    :disabled="MissingValues"
                     @click="
                       formTitle === 'Novi odlazak'
                         ? postOdlazak()
@@ -270,7 +270,7 @@ export default {
         .substr(0, 10),
       vrsta: null,
       predsjednik: "",
-      sifra: "",
+      sifra: 0,
     },
     defaultItem: {
       zivbroj: 0,
@@ -279,7 +279,7 @@ export default {
         .substr(0, 10),
       vrsta: null,
       predsjednik: "",
-      sifra: "",
+      sifra: 0,
     },
 
     zivbrojRules: [(v) => !!v || "Niste unijeli životni broj goveda."],
@@ -300,12 +300,12 @@ export default {
       return this.editedIndex === -1 ? "Novi odlazak" : "Uredi odlazak";
     },
 
-    pravoktuniciNisuIspunjeni() {
+    MissingValues() {
       return (
         this.editedItem.zivbroj == 0 ||
         this.editedItem.vrsta == null ||
         this.editedItem.predsjednik == "" ||
-        this.editedItem.sifra == ""
+        this.editedItem.sifra == 0
       );
     },
   },
