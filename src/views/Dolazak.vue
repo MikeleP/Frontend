@@ -317,7 +317,9 @@ export default {
 
   methods: {
     async getDolazak() {
-      let response = await fetch("http://localhost:3000/dolazak");
+      let response = await fetch(
+        "https://registar-goveda.herokuapp.com/dolazak"
+      );
       let dolazak = await response.json();
       return dolazak;
     },
@@ -330,7 +332,7 @@ export default {
         sifra: this.editedItem.sifra,
       };
       console.log(ob);
-      fetch("http://localhost:3000/dolazak", {
+      fetch("https://registar-goveda.herokuapp.com/dolazak", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -347,18 +349,24 @@ export default {
         predsjednik: this.editedItem.predsjednik,
         sifra: this.editedItem.sifra,
       };
-      let response = await fetch(`http://localhost:3000/dolazak/${idDolaska}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(noviPodaciODolasku),
-      });
+      let response = await fetch(
+        `https://registar-goveda.herokuapp.com/dolazak/${idDolaska}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(noviPodaciODolasku),
+        }
+      );
       this.$router.go();
     },
 
     async removeDolazak(idDolaska) {
-      let response = await fetch(`http://localhost:3000/dolazak/${idDolaska}`, {
-        method: "DELETE",
-      });
+      let response = await fetch(
+        `https://registar-goveda.herokuapp.com/dolazak/${idDolaska}`,
+        {
+          method: "DELETE",
+        }
+      );
       this.$router.go();
     },
 
