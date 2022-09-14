@@ -416,7 +416,9 @@ export default {
 
   methods: {
     async getGovedo() {
-      let response = await fetch("http://localhost:3000/govedo");
+      let response = await fetch(
+        "https://registar-goveda.herokuapp.com/govedo"
+      );
       let govedo = await response.json();
       return govedo;
     },
@@ -433,7 +435,7 @@ export default {
         otac: this.editedItem.otac,
       };
       console.log(ob);
-      fetch("http://localhost:3000/govedo", {
+      fetch("https://registar-goveda.herokuapp.com/govedo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -454,18 +456,24 @@ export default {
         majka: this.editedItem.majka,
         otac: this.editedItem.otac,
       };
-      let response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(noviPodaciOGovedu),
-      });
+      let response = await fetch(
+        `https://registar-goveda.herokuapp.com/govedo/${idGoveda}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(noviPodaciOGovedu),
+        }
+      );
       this.$router.go();
     },
 
     async removeGovedo(idGoveda) {
-      let response = await fetch(`http://localhost:3000/govedo/${idGoveda}`, {
-        method: "DELETE",
-      });
+      let response = await fetch(
+        `https://registar-goveda.herokuapp.com/govedo/${idGoveda}`,
+        {
+          method: "DELETE",
+        }
+      );
       this.$router.go();
     },
 
