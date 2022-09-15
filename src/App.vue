@@ -34,7 +34,6 @@ export default {
   padding: 0;
   background-image: url(./assets/krave.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
   height: 100vh;
 }
 </style>
