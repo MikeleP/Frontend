@@ -29,13 +29,10 @@ export default {
   float: none;
 }
 
-* {
+#app {
   margin: 0;
   padding: 0;
-}
-
-#app {
-  background-image: url("./assets/krave.jpg");
+  background-image: url(./assets/krave.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
