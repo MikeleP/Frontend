@@ -230,8 +230,8 @@ export default {
       },
       {
         text: "Živ. broj goveda",
-        sortable: false,
         value: "zivbroj",
+        sortable: false,
         class: "green lighten-2",
       },
       {

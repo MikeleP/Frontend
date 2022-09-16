@@ -242,18 +242,29 @@ export default {
       },
       {
         text: "Životni broj goveda",
-        sortable: false,
         value: "zivbroj",
+        sortable: false,
         class: "green lighten-2",
       },
       { text: "Datum odlaska", value: "datum", class: "green lighten-2" },
-      { text: "Vrsta odlaska", value: "vrsta", class: "green lighten-2" },
+      {
+        text: "Vrsta odlaska",
+        value: "vrsta",
+        sortable: false,
+        class: "green lighten-2",
+      },
       {
         text: "Ime i prezime novog predsjednika",
         value: "predsjednik",
+        sortable: false,
         class: "green lighten-2",
       },
-      { text: "Šifra predjsednika", value: "sifra", class: "green lighten-2" },
+      {
+        text: "Šifra predjsednika",
+        value: "sifra",
+        sortable: false,
+        class: "green lighten-2",
+      },
       {
         text: "Izmjena/Brisanje",
         value: "akcija",
@@ -270,7 +281,7 @@ export default {
         .substr(0, 10),
       vrsta: null,
       predsjednik: "",
-      sifra: 0,
+      sifra: "",
     },
     defaultItem: {
       zivbroj: 0,
@@ -279,7 +290,7 @@ export default {
         .substr(0, 10),
       vrsta: null,
       predsjednik: "",
-      sifra: 0,
+      sifra: "",
     },
 
     zivbrojRules: [(v) => !!v || "Niste unijeli životni broj goveda."],
@@ -305,7 +316,7 @@ export default {
         this.editedItem.zivbroj == 0 ||
         this.editedItem.vrsta == null ||
         this.editedItem.predsjednik == "" ||
-        this.editedItem.sifra == 0
+        this.editedItem.sifra == ""
       );
     },
   },
