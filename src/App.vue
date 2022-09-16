@@ -30,8 +30,6 @@ export default {
 }
 
 #app {
-  margin: 0;
-  padding: 0;
   background-image: url(./assets/krave.jpg);
   background-size: cover;
   height: 100vh;
